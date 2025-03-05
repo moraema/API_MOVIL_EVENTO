@@ -9,4 +9,4 @@ router.patch('/:id',uploadFile.single('imagen'), eventoController.updateEvento);
 router.post('/', uploadFile.single('imagen'), eventoController.create);
 router.delete('/:id', eventoController.deletoEvento);
 
-module.exports = router
+module.exports = router 

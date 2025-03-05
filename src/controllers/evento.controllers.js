@@ -1,11 +1,10 @@
 const Eventos = require('../models/eventos.model');4
 const { cloudinary } = require('../service/cloudinary/cloud.service');
-
-
+const { sendNotificationByToken } = require('../service/firebase/firebase.service');
 
 const create = async (req, res) => {
     try {
-        const { titulo, descripcion, fecha, capacidad, lugares_disponibles, precio, ubicacion, genero } = req.body;
+        const { titulo, descripcion, fecha, capacidad, lugares_disponibles, precio, ubicacion, genero, token } = req.body;
         const imagen  = req.file;
 
         
@@ -34,6 +33,11 @@ const create = async (req, res) => {
         const result = await evento.createEvento();
 
         if (result) {
+            
+            if (result) {
+                await sendNotificationByToken(token, evento)
+            }
+
             res.status(201).json({
                 message: "El evento se creó correctamente",
                 data: evento
