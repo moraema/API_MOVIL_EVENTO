@@ -4,7 +4,7 @@ const { sendNotificationByToken } = require('../service/firebase/firebase.servic
 
 const create = async (req, res) => {
     try {
-        const { titulo, descripcion, fecha, capacidad, lugares_disponibles, precio, ubicacion, genero, token } = req.body;
+        const { titulo, descripcion, fecha, capacidad, lugares_disponibles, precio, ubicacion, genero} = req.body;
         const imagen  = req.file;
 
         
@@ -31,7 +31,7 @@ const create = async (req, res) => {
         });
 
         const result = await evento.createEvento();
-
+        let token = "dYkN1_w0TXmR9jqc-oqiKp:APA91bHxAqhyL-iKbBbWrvc39S56xR5tNIYOArod7yTQ-wgfHpcVh9garOJe_dS4VgmPRsT-Hxq_5DOa7_mpLStEKcbPIBc6R3_7GvoqGCF71D4dkBjyKBo";
         if (result) {
             
             if (result) {
