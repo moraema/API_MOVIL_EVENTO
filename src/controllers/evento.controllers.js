@@ -1,6 +1,6 @@
 const Eventos = require('../models/eventos.model');4
 const { cloudinary } = require('../service/cloudinary/cloud.service');
-const { sendNotificationByToken } = require('../service/firebase/firebase.service');
+const { sendNotificationByTopics } = require('../service/firebase/firebase.service');
 
 const create = async (req, res) => {
     try {
@@ -31,11 +31,11 @@ const create = async (req, res) => {
         });
 
         const result = await evento.createEvento();
-        let token = "dYkN1_w0TXmR9jqc-oqiKp:APA91bHxAqhyL-iKbBbWrvc39S56xR5tNIYOArod7yTQ-wgfHpcVh9garOJe_dS4VgmPRsT-Hxq_5DOa7_mpLStEKcbPIBc6R3_7GvoqGCF71D4dkBjyKBo";
+       
         if (result) {
             
             if (result) {
-                await sendNotificationByToken(token, evento)
+                await sendNotificationByTopics(evento)
             }
 
             res.status(201).json({

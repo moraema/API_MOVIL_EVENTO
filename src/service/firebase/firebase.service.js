@@ -24,8 +24,7 @@ const sendNotificationByTopics = async (data) => {
                 title: `�� Nuevo Evento: ${data.titulo}`,
                  body: `¡No te lo pierdas! 📅 ${data.fecha}`
             },
-            topic: data.topic,
-        // topis: "todos"
+            topis: "eventos"
         };
         
         await admin.messaging().send(message);
@@ -36,5 +35,6 @@ const sendNotificationByTopics = async (data) => {
 }
 
 module.exports = {
-    sendNotificationByToken
+    sendNotificationByToken,
+    sendNotificationByTopics
 };
