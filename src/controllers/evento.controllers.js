@@ -15,7 +15,8 @@ const create = async (req, res) => {
 
         
         const uploadResponse = await cloudinary.v2.uploader.upload(imagen.path,{
-            folder: 'eventos'
+            folder: 'eventos',
+            format: "jpg" 
         });
 
         const evento = new Eventos({
