@@ -49,10 +49,11 @@ class Usuario {
     static async getUsername(username) {
         const connection = await db.createConnection();
 
-        const [result] = await connection.execute("SELECT id, contraseña FROM usuario WHERE username =?", 
+        const [result] = await connection.execute("SELECT id, contraseña, token_dispositivo FROM usuario WHERE username =?", 
             [username]
         );
 
+        console.log(result); 
         connection.end();
 
         if (result.length === 0) {

@@ -5,7 +5,7 @@ const eventoController = require('../controllers/evento.controllers');
 const middlewareController = require('../middlewares/auth.middleware');
 
 router.get('/', middlewareController.verificarJwt, eventoController.getEvento);
-router.get('/:id', middlewareController.verificarJwt, eventoController.getEventoById);
+router.get('/:id',  eventoController.getEventoById);
 router.patch('/:id',middlewareController.verificarJwt, uploadFile.single('imagen'), eventoController.updateEvento);
 router.post('/', middlewareController.verificarJwt, uploadFile.single('imagen'), eventoController.create);
 router.delete('/:id', middlewareController.verificarJwt, eventoController.deletoEvento);
