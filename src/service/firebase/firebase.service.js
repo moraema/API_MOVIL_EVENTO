@@ -4,8 +4,8 @@ const sendNotificationByToken = async (token, data) => {
     try {
         const message = {
             notification: {
-                title: `📢 Nuevo Evento: ${data.titulo}`,
-                 body: `¡No te lo pierdas! 📅 ${data.fecha}`
+                title: `📢 SE ha creado una nueva reserva`,
+                 body: `Acomprado ${data.cantidad_lugares} boletos y a pago: ${data.total} pesos MXN`
             },
             token: token,
         };

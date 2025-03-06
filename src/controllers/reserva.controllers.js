@@ -1,8 +1,9 @@
 const Reserva = require('../models/reserva.model');
+const { sendNotificationByToken } = require('../service/firebase/firebase.service');
 
 const create = async (req, res) => {
     try {
-        const {cantidad_lugares, total, evento_id, usuario_id, } = req.body;
+        const {cantidad_lugares, total, evento_id, usuario_id, token } = req.body;
 
         const reserva = new Reserva({
             cantidad_lugares,
@@ -11,19 +12,24 @@ const create = async (req, res) => {
             usuario_id,
         });
 
-        const resultado = await reserva.create();
+        const result = await reserva.create();
 
-        if (!resultado) {
-            return res.status(400).json({
-                message: "Error al crear el administrador",
-                error: "Error desconocido al insertar en la base de datos"
-            });
+        if (result) {
+            
+            if (result) {
+                await sendNotificationByToken(token, reserva)
+            }
+
+            res.status(201).json({
+                message: "La reserva se creó correctamente",
+                data: reserva
+            })
+        } else {
+            res.status(500).json({
+                message: "Error al crear la reserva",
+                error: error
+            })
         }
-
-        return res.status(201).json({
-            message: "Reserva creada exitosamente",
-            data: reserva
-        })
         
     } catch (error) {
         return res.status(500).json({
