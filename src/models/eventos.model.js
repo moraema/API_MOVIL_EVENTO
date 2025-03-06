@@ -65,9 +65,9 @@ class Eventos {
     static async getEventoById(id) {
         const connection = await db.createConnection();
 
-       // const [result] = await connection.execute("SELECT id, titulo, descripcion, fecha, capacidad, lugares_disponibles, precio, imagen, ubicacion, genero FROM evento WHERE id =?", [id]);
+       const [result] = await connection.execute("SELECT id, titulo, descripcion, fecha, capacidad, lugares_disponibles, precio, imagen, ubicacion, genero FROM evento WHERE id =?", [id]);
 
-       const [result] = await connection.execute(
+     /*  const [result] = await connection.execute(
         `SELECT e.id, e.titulo, e.descripcion, e.fecha, e.capacidad, 
                 e.lugares_disponibles, e.precio, e.imagen, e.ubicacion, e.genero, 
                 r.cantidad_lugares, r.total 
@@ -76,16 +76,15 @@ class Eventos {
          WHERE r.usuario_id = ?`, 
         [id] 
       );
-      
+      */
       
 
         connection.end();
 
         if (result.length > 0) {
             const row = result[0];
-         //   return new Eventos({id: row.id, titulo: row.titulo, descripcion: row.descripcion, fecha: row.fecha, capacidad: row.capacidad, lugares_disponibles: row.lunares_disponibles, precio: row.precio, imagen: row.imagen, ubicacion: row.ubicacion, genero: row.genero});
-         return new Eventos({id: row.id, titulo: row.titulo, descripcion: row.descripcion, fecha: row.fecha, capacidad: row.capacidad, lugares_disponibles: row.lunares_disponibles, precio: row.precio, imagen: row.imagen, ubicacion: row.ubicacion, genero: row.genero, cantidad_lugares: row.cantidad_lugares, total: row.total
-         });
+          return new Eventos({id: row.id, titulo: row.titulo, descripcion: row.descripcion, fecha: row.fecha, capacidad: row.capacidad, lugares_disponibles: row.lunares_disponibles, precio: row.precio, imagen: row.imagen, ubicacion: row.ubicacion, genero: row.genero});
+          // return new Eventos({id: row.id, titulo: row.titulo, descripcion: row.descripcion, fecha: row.fecha, capacidad: row.capacidad, lugares_disponibles: row.lunares_disponibles, precio: row.precio, imagen: row.imagen, ubicacion: row.ubicacion, genero: row.genero, cantidad_lugares: row.cantidad_lugares, total: row.total});
         }
 
         return null;
